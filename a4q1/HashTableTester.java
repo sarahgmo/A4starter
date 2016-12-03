@@ -73,12 +73,12 @@ public class HashTableTester {
 	
 		System.out.println("number of songs: " + songTable.size());
 		System.out.println("number of buckets in hashtable: " + songTable.getNumBuckets());
-		/*		
+				
 		//  rehashing changes the capacity of the table, but not the number of entries
 		songTable.rehash();
 		System.out.println("number of songs: " + songTable.size());
 		System.out.println("number of buckets in hashtable: " + songTable.getNumBuckets());
-		*/		
+			
 		// Try to retrieve a song
 		StringBuffer errors = new StringBuffer();
 		Song testSong1 = songTable.get("Scream");
@@ -120,6 +120,7 @@ public class HashTableTester {
 			System.out.print(song);
 			System.out.println();
 		}
+		*/
 		
 		// test containsKey(),  keys(),  values()
 		
@@ -132,7 +133,7 @@ public class HashTableTester {
 		System.out.print("ALL SONGS: ");
 		for (Song song:songTable.values())
 			System.out.print(song + ",");
-		*/
+		
 	}
 	
 }

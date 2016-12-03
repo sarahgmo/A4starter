@@ -40,8 +40,7 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		
 		//  ADD YOUR CODE HERE
 		
-		this.numBuckets = numBuckets; //whyyyy
-		//by this^ logic, shouldn't i also initialize load factor?
+		this.numBuckets = numBuckets;
 		//initialize buckets array
 		this.buckets = new ArrayList<LinkedList<HashEntry>>(this.numBuckets);
 		//initialize linked lists in each bucket
@@ -93,10 +92,10 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		HashEntry hashEntry = new HashEntry(key, value);
 		
 		if (buckets.get(hashValue).contains(hashEntry)){ //collision
-			
+			V cool = get(key);
 			buckets.get(hashValue).add(hashEntry);
 			entryCount++;
-			return get(key);
+			return cool;
 		}
 		
 		buckets.get(hashValue).add(hashEntry); 
@@ -194,7 +193,26 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 	{
 		//   ADD YOUR CODE HERE
 		
+		int newNumBuckets = numBuckets*2; //double the size
+		//^ should I call it newNumBuckets?
+		//create a new table with double dimensions
+		MyHashTable<K,V> newTable = new MyHashTable<K,V>(newNumBuckets);
+//			//initialize buckets array
+//			this.buckets = new ArrayList<LinkedList<HashEntry>>(this.numBuckets);
+//			//initialize linked lists in each bucket
+//			for (int i = 0; i < this.numBuckets; i++){
+//				this.buckets.add(new LinkedList<HashEntry>());
+	
+		//for all linked lists (buckets) pointing to old arraylist, 
+		//make them point to new hash table
+		
+		for (int i = 0; i < numBuckets; i++){
+			MyHashTable<K,V>(numBuckets).buckets;
+			//newTable.buckets.get(i).get(i)=MyHashTable.buckets.get(i).get(i);
+		}
+		
 	}
+	
 	
 	/*
 	 * Checks if the hash table contains the given key.
@@ -216,6 +234,16 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		
 		//   ADD YOUR CODE HERE
 
+		//go through each ArrayList index, go into linked list, add all keys from each entry
+		for (int i = 0; i < numBuckets; i++){ //i = hashValue //go through ArrayList indices 
+			//listKeys.add(i, buckets.get(hashFunction(key)).get(i).getKey());
+			LinkedList<HashEntry> linkedList = new LinkedList<HashEntry>();
+			linkedList = buckets.get(i); //linked list for each arraylist index
+			for(int j = 0; j < linkedList.size(); j++){ //go through elements in linked list
+				listKeys.add(j, buckets.get(i).get(j).getKey());
+			}
+		}
+		
 		return listKeys;
 
 	}
@@ -228,6 +256,14 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		ArrayList<V>  listValues = new ArrayList<V>();
 		
 		//   ADD YOUR CODE HERE
+		
+		for (int i = 0; i < numBuckets; i++){ //i = hashValue //go through ArrayList indices 
+			LinkedList<HashEntry> linkedList = new LinkedList<HashEntry>();
+			linkedList = buckets.get(i); //linked list for each arraylist index
+			for(int j = 0; j < linkedList.size(); j++){ //go through elements in linked list
+				listValues.add(j, buckets.get(i).get(j).getValue());
+			}
+		}
 		
 		return listValues;
 	}
