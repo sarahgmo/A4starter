@@ -103,6 +103,12 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		//buckets is arraylist
 		//have to get() buckets in order to access linked list within
 		
+		//check load factor
+		//load factor = #entries/#buckets
+		double loadFactor = entryCount/numBuckets;
+		if(loadFactor > MAX_LOAD_FACTOR){
+			rehash();
+		}
 		
 		return null;   //  remove this stub
 	}
@@ -197,20 +203,22 @@ class MyHashTable<K,V> implements Iterable<MyHashTable<K,V>.HashEntry>{
 		//^ should I call it newNumBuckets?
 		//create a new table with double dimensions
 		MyHashTable<K,V> newTable = new MyHashTable<K,V>(newNumBuckets);
-//			//initialize buckets array
-//			this.buckets = new ArrayList<LinkedList<HashEntry>>(this.numBuckets);
-//			//initialize linked lists in each bucket
-//			for (int i = 0; i < this.numBuckets; i++){
-//				this.buckets.add(new LinkedList<HashEntry>());
-	
+
 		//for all linked lists (buckets) pointing to old arraylist, 
 		//make them point to new hash table
-		
-		for (int i = 0; i < numBuckets; i++){
-			MyHashTable<K,V>(numBuckets).buckets;
-			//newTable.buckets.get(i).get(i)=MyHashTable.buckets.get(i).get(i);
+		//this. = old hash table
+		for (int i = 0; i < this.numBuckets; i++){
+			for(int j = 0; j < this.buckets.get(i).size(); j++){ //this...size() = size of linked list
+				K key = this.buckets.get(i).get(j).getKey();
+				V value = this.buckets.get(i).get(j).getValue();
+				//numBuckets = newNumBuckets;
+				newTable.put(key, value);
+			}
 		}
+		this.buckets = newTable.buckets;
+		this.numBuckets = newNumBuckets;
 		
+		//numBuckets = newNumBuckets;
 	}
 	
 	
